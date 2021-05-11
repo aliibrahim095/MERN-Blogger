@@ -21,7 +21,6 @@ const Routing = () => {
     // console.log(typeof(user),user)
     if(user){
       dispatch({type:"User",payload:user})
-      history.push('/home')
     }else{
       history.push('/signin')
     }
