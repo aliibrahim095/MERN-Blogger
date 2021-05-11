@@ -1,13 +1,17 @@
-import React ,{useState} from "react";
-import {Link,useHistory} from "react-router-dom";
-import M from "materialize-css"
+import React, { useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "../../App";
+import M from "materialize-css";
 
 const Signin = () => {
+  const { state, dispatch } = useContext(UserContext);
+
   const history = useHistory();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const postData = () => {
-    if (email&&
+    if (
+      email &&
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
       )
@@ -25,20 +29,24 @@ const Signin = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        console.log(data);
         if (data.error) {
           M.toast({ html: data.error, classes: "#d50000 red accent-4" });
         } else {
-          localStorage.setItem("jwt",data.token)
-          localStorage.setItem("user",JSON.stringify(data.user))
-          M.toast({ html: "signed in successfully", classes: "#1b5e20 green darken-4" });
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          dispatch({ type: "User", payload: data.user });
+          M.toast({
+            html: "signed in successfully",
+            classes: "#1b5e20 green darken-4",
+          });
           history.push("/");
         }
-      }).catch(err=>{
-        console.log(err)
       })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
 
   return (
     <div className="mycard">
@@ -57,7 +65,12 @@ const Signin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="btn waves-effect waves-light #64b5f6 blue darken-1" onClick={()=>postData()}>Signin</button>
+        <button
+          className="btn waves-effect waves-light #64b5f6 blue darken-1"
+          onClick={() => postData()}
+        >
+          Signin
+        </button>
         <h5>
           <Link to="/signup">Create An Account ? </Link>
         </h5>
