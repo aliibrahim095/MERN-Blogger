@@ -16,7 +16,9 @@ const Profile = () => {
       });
   }, []);
   return (
-    <div style={{ maxWidth: "550px", margin: "0px auto" }}>
+      <>
+      {mypics? 
+      <div style={{ maxWidth: "550px", margin: "0px auto" }}>
       <div
         style={{
           display: "flex",
@@ -33,6 +35,7 @@ const Profile = () => {
         </div>
         <div>
           <h4>{state?state.name:"Loading"}</h4>
+          <h4>{state?state.email:"Loading"}</h4>
           <div
             style={{
               display: "flex",
@@ -40,7 +43,7 @@ const Profile = () => {
               width: "109%",
             }}
           >
-            <h6>10 posts</h6>
+            <h6>{mypics.length} {(mypics.length==1)?<sm>Post</sm>:<sm>Posts</sm>}</h6>
             <h6>10 followers</h6>
             <h6>10 following</h6>
           </div>
@@ -52,6 +55,9 @@ const Profile = () => {
         })}
       </div>
     </div>
+      :<h4>Loading...!</h4>}
+      
+    </>
   );
 };
 

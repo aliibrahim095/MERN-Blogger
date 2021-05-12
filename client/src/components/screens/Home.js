@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 
 
 import { UserContext } from "../../App";
@@ -129,9 +129,9 @@ const Home = () => {
     <div className="home">
       {data.map((item) => {
         return (
-          <div className="card home-card" key={item._id}>
+          <div style={{borderRadius:"20px",padding:"1px"}} className="card home-card" key={item._id}>
             <h5>
-              {item.postedBy.name}
+              <Link style={{fontWeight:"bold",marginLeft:"7px"}} className="linktoprofile white-text text-darken-2" to={item.postedBy._id !== state._id ?"/profile/"+item.postedBy._id:"/profile"}>{item.postedBy.name}</Link>
               {item.postedBy._id == state._id && (
                 <i
                   className="material-icons"
@@ -143,7 +143,7 @@ const Home = () => {
               )}
             </h5>
             <div className="card-image">
-              <img src={item.photo} />
+              <img className="cardimagepost" style={{  borderRadius:"20px"}} src={item.photo} />
             </div>
             <div className="card-content">
               <i className="material-icons" style={{ color: "red" }}>

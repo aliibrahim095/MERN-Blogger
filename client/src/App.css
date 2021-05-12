@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+
 a {
   color: black !important;
 }
@@ -49,4 +51,16 @@ a {
 
 .page-footer{
   margin-top: 20px;
+}
+.linktoprofile{
+  background-color: #f55d6d;
+  border-radius:10px;
+  padding:5px;
+}
+.linktoprofile:hover{
+  background-color: #071f2b;
+  
+}
+.cardimagepost{
+  height:400px;
 }
