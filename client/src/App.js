@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useReducer ,useContext} from "react";
+import React, { useEffect, createContext, useReducer, useContext } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./App.css";
@@ -14,19 +14,17 @@ import { reducer, initialState } from "./reducers/userReducer";
 export const UserContext = createContext();
 
 const Routing = () => {
-
   const history = useHistory();
-  const {state, dispatch} = useContext(UserContext)
-  useEffect(()=>{
-    const user =JSON.parse(localStorage.getItem("user"))
+  const { state, dispatch } = useContext(UserContext);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
     // console.log(typeof(user),user)
-    if(user){
-      dispatch({type:"User",payload:user})
-    }else{
-      history.push('/signin')
+    if (user) {
+      dispatch({ type: "User", payload: user });
+    } else {
+      history.push("/signin");
     }
-
-  },[])
+  }, []);
   return (
     <Switch>
       <Route exact path="/">
@@ -55,9 +53,9 @@ function App() {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <BrowserRouter>
-        <Navbar />
-        <Routing />
-        <Footer />
+          <Navbar />
+          <Routing />
+          <Footer />
       </BrowserRouter>
     </UserContext.Provider>
   );

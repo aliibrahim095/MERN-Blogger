@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
 
-a {
-  color: black !important;
+a:hover{
+  background-color: darkred !important;
 }
 
 .brand-logo,h2 {
@@ -50,7 +50,10 @@ a {
 }
 
 .page-footer{
+  padding-bottom: 0;
   margin-top: 20px;
+  background-color: #000;
+
 }
 .linktoprofile{
   background-color: #f55d6d;
@@ -63,4 +66,18 @@ a {
 }
 .cardimagepost{
   height:400px;
+}
+
+
+.navlink{
+  color:white;
+}
+
+.deleteicon{
+  margin-right:10px;
+}
+.deleteicon:hover{
+  color:red;
+  cursor: pointer;
+
 }

@@ -8,13 +8,14 @@ const Navbar = () => {
     if (state) {
       return [
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link className="navlink" to="/profile">Profile</Link>
         </li>,
         <li>
-          <Link to="/create">Create post</Link>
+          <Link className="navlink" to="/create">Create post</Link>
         </li>,
         <li>
-          <button
+          <button 
+          style={{ marginRight: "8px",marginLeft:"5px", borderRadius: "20px"}}
             className="btn waves-effect waves-light #b71c1c red darken-4"
             onClick={() => {
               localStorage.clear();
@@ -29,18 +30,18 @@ const Navbar = () => {
     } else {
       return [
         <li>
-          <Link to="/signin">Signin</Link>
+          <Link className="navlink" to="/signin">Signin</Link>
         </li>,
         <li>
-          <Link to="/signup">Signup</Link>
+          <Link className="navlink" to="/signup">Signup</Link>
         </li>,
       ];
     }
   };
   return (
     <nav>
-      <div className="nav-wrapper #f55d6d">
-        <Link to={state ? "/" : "signin"} className="brand-logo left">
+      <div className="black nav-wrapper">
+        <Link to={state ? "/" : "signin"} className="navlink brand-logo left">
           Ali. Blogger
         </Link>
         <ul id="nav-mobile" className="right">
