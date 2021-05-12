@@ -55,7 +55,9 @@ router.get("/mypost", requiredLogin, (req, res) => {
 router.put('/like',requiredLogin, (req, res)=>{
   Post.findByIdAndUpdate(req.body.postId,{
     $push:{likes:req.user._id}
-  },{new:true}).exec((err,result)=>{
+  },{new:true})
+  .populate("postedBy", "_id name")
+  .exec((err,result)=>{
   if(err){
     return res.status(422).json({ error: err})
 
@@ -67,7 +69,9 @@ router.put('/like',requiredLogin, (req, res)=>{
 router.put('/unlike',requiredLogin, (req, res)=>{
   Post.findByIdAndUpdate(req.body.postId,{
     $pull:{likes:req.user._id}
-  },{new:true}).exec((err,result)=>{
+  },{new:true})
+  .populate("postedBy", "_id name")
+  .exec((err,result)=>{
   if(err){
     return res.status(422).json({ error: err})
 
@@ -98,6 +102,24 @@ router.put('/comment',requiredLogin, (req, res)=>{
     res.json(result)
   }
 })
+})
+
+router.delete("/deletepost/:postId",requiredLogin,(req,res)=>{
+   Post.findOne({_id:req.params.postId})
+  .populate("postedBy","_id")
+  .exec((err,post)=>{
+    if(err || !post){
+      return res.status(422).json({ error:err})
+    }
+    if(post.postedBy._id.toString() === req.user._id.toString()){
+      post.remove()
+      .then(result=>{
+        res.json({result})
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
+  })
 })
 
 

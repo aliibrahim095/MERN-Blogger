@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
+
 
 import { UserContext } from "../../App";
 const Home = () => {
+
+  const history = useHistory();
   const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   useEffect(() => {
@@ -96,17 +100,48 @@ const Home = () => {
           }
         });
         setData(newData);
-      }).catch(err=>{
-        console.log(err)
       })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
+  const deletPost = (postId) => {
+    fetch(`/deletepost/${postId}`, {
+      method: "delete",
+      headers: {
+        // 'Content-Type': 'application/json',
+        // 'Accept': 'application/json',
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = data.filter(item => {
+          return item._id !== result._id;
+        });
+        setData(newData);
+        // window.location.replace('http://localhost:3000/')
+      });
+  };
   return (
     <div className="home">
       {data.map((item) => {
         return (
           <div className="card home-card" key={item._id}>
-            <h5>{item.postedBy.name}</h5>
+            <h5>
+              {item.postedBy.name}
+              {item.postedBy._id == state._id && (
+                <i
+                  className="material-icons"
+                  style={{ float: "right" }}
+                  onClick={() => deletPost(item._id)}
+                >
+                  delete
+                </i>
+              )}
+            </h5>
             <div className="card-image">
               <img src={item.photo} />
             </div>
@@ -133,13 +168,16 @@ const Home = () => {
               <h6>{item.likes.length} Likes</h6>
               <h6>{item.title}</h6>
               <p>{item.body}</p>
-              {
-                item.comments.map(record=>{
-                  return(
-                    <h6 key={record._id}><span style={{fontWeight:"500",color:"red"}}>{record.postedBy.name} </span>{record.text}</h6>
-                  )
-                })
-              }
+              {item.comments.map((record) => {
+                return (
+                  <h6 key={record._id}>
+                    <span style={{ fontWeight: "500", color: "red" }}>
+                      {record.postedBy.name}{" "}
+                    </span>
+                    {record.text}
+                  </h6>
+                );
+              })}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
