@@ -122,7 +122,7 @@ const Home = () => {
           return item._id !== result._id;
         });
         setData(newData);
-        // window.location.replace('http://localhost:3000/')
+        window.location.replace('http://localhost:3000/')
       });
   };
   return (
