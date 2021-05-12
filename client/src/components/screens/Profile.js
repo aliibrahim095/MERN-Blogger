@@ -49,10 +49,10 @@ const Profile = () => {
               >
                 <h6>
                   {mypics.length}{" "}
-                  {mypics.length == 1 ? <sm>Post</sm> : <sm>Posts</sm>}
+                  {mypics.length == 1 ? <b>Post</b> : <b>Posts</b>}
                 </h6>
-                <h6> 0  followers</h6>
-                <h6> 0  following</h6>
+                <h6> {state ? state.followers.length : "0"} followers</h6>
+                <h6> {state ? state.following.length : "0"} following</h6>
               </div>
             </div>
           </div>

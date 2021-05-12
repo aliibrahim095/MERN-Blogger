@@ -81,3 +81,8 @@ a:hover{
   cursor: pointer;
 
 }
+.thumbyicon:hover{
+  cursor: pointer;
+  transform:scale(1.2);
+    
+}

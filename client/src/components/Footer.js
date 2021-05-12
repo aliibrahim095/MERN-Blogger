@@ -18,7 +18,7 @@ const Footer = () => {
             <ul>
               <li style={{padding:"5px"}}>
                 <a
-                  class="waves-effect waves-light btn"
+                  className="waves-effect waves-light btn"
                   href="https://www.linkedin.com/in/aliibrahim095"
                 >Linkedin</a>
               </li>
@@ -32,7 +32,7 @@ const Footer = () => {
               </li> */}
               <li style={{padding:"5px"}}>
                 <a
-                  class="waves-effect waves-light btn"
+                  className="waves-effect waves-light btn"
                   href="4liebrahim@gmail.com"
                 >Google
                 </a>

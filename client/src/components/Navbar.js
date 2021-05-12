@@ -13,6 +13,10 @@ const Navbar = () => {
         <li>
           <Link className="navlink" to="/create">Create post</Link>
         </li>,
+        ,
+        <li>
+          <Link className="navlink" to="/myfollowingposts">My Followin Posts</Link>
+        </li>,
         <li>
           <button 
           style={{ marginRight: "8px",marginLeft:"5px", borderRadius: "20px"}}

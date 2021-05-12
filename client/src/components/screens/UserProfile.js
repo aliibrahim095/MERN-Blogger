@@ -20,6 +20,10 @@ const UserProfile = () => {
         console.log(result);
         setProfile(result);
       });
+
+
+
+
   }, []);
 
   const followUser = () => {
@@ -106,8 +110,8 @@ const UserProfile = () => {
               />
             </div>
             <div>
-              <h4>{userProfile.user.name}</h4>
-              <h5>{userProfile.user.email}</h5>
+              <h4>{userProfile && userProfile.user.name}</h4>
+              <h5>{userProfile && userProfile.user.email}</h5>
               <div
                 style={{
                   display: "flex",
@@ -116,15 +120,15 @@ const UserProfile = () => {
                 }}
               >
                 <h6>
-                  {userProfile.posts.length}
-                  {userProfile.posts.length == 1 ? (
-                    <sm> Post</sm>
+                  {userProfile && userProfile.posts.length}
+                  {userProfile && userProfile.posts.length == 1 ? (
+                    <b> Post</b>
                   ) : (
-                    <sm> Posts</sm>
+                    <b> Posts</b>
                   )}
                 </h6>
-                <h6>{userProfile.user.followers.length} Followers</h6>
-                <h6>{userProfile.user.following.length} Following</h6>
+                <h6>{userProfile && userProfile.user.followers.length} Followers</h6>
+                <h6>{userProfile && userProfile.user.following.length} Following</h6>
               </div>
 
               {showfollow ? 
@@ -147,7 +151,7 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="gallery">
-            {userProfile.posts.map((item) => {
+            {userProfile && userProfile.posts.map((item) => {
               return (
                 <img
                   key={item._id}

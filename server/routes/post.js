@@ -17,6 +17,20 @@ router.get("/allposts",requiredLogin, (req, res) => {
       console.log(err);
     });
 });
+router.get("/getsubpost",requiredLogin, (req, res) => {
+  // if postedBy in following 
+  Post.find({postedBy:{$in:req.user.following}})
+    .populate("postedBy", "_id name")
+    .populate("comments.postedBy","_id name")
+    .then((posts) => {
+      res.json({ posts });
+      console.log(posts);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 
 router.post("/createpost", requiredLogin, (req, res) => {
   const { title, body, photo } = req.body;
