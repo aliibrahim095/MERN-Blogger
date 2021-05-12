@@ -9,13 +9,14 @@ const Navbar = () => {
       return [
         <li>
           <Link className="navlink" to="/profile">Profile</Link>
-        </li>,
-        <li>
-          <Link className="navlink" to="/create">Create post</Link>
-        </li>,
+        </li>
+        // ,
+        // <li>
+        //   <Link className="navlink" to="/create">Create post</Link>
+        // </li>,
         ,
         <li>
-          <Link className="navlink" to="/myfollowingposts">My Followin Posts</Link>
+          <Link className="navlink" to="/myfollowingposts">Following</Link>
         </li>,
         <li>
           <button 
@@ -45,7 +46,7 @@ const Navbar = () => {
   return (
     <nav>
       <div className="black nav-wrapper">
-        <Link to={state ? "/" : "signin"} className="navlink brand-logo left">
+        <Link style={{marginLeft: "15px"}} to={state ? "/" : "signin"} className="navlink brand-logo left">
           Ali. Blogger
         </Link>
         <ul id="nav-mobile" className="right">

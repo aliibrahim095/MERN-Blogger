@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { UserContext } from "../../App";
-import { useParams } from "react-router-dom";
+import { useParams ,Link} from "react-router-dom";
 
 const UserProfile = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -172,6 +172,13 @@ const UserProfile = () => {
         </div>
       ) : (
         <h2>Loading...!!</h2>
+      )}
+      {state && (
+        <div id="btnAddNewPost">
+          <Link className="addlink" to="/create">
+          <button className="addNewPost">+</button>
+          </Link>
+        </div>
       )}
     </>
   );

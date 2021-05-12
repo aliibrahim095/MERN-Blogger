@@ -4,6 +4,9 @@
 a:hover{
   background-color: darkred !important;
 }
+.addlink:hover{
+  background-color:#dbdbdb !important;
+}
 
 .brand-logo,h2 {
   font-family: "Itim", cursive;
@@ -51,7 +54,7 @@ a:hover{
 
 .page-footer{
   padding-bottom: 0;
-  margin-top: 20px;
+  margin-top: 30%;
   background-color: #000;
 
 }
@@ -59,6 +62,7 @@ a:hover{
   background-color: #f55d6d;
   border-radius:10px;
   padding:5px;
+
 }
 .linktoprofile:hover{
   background-color: #071f2b;
@@ -84,5 +88,31 @@ a:hover{
 .thumbyicon:hover{
   cursor: pointer;
   transform:scale(1.2);
-    
+
+}
+.userPicAndName{
+  display:flex;  
+}
+
+.addNewPost {
+  background-color :darkred;
+  color: white;
+  width:60px;
+  height: 60px;
+  border-radius:60px;
+  border-color: #d3d3d3;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#btnAddNewPost {
+
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.addNewPost:hover{
+  cursor: pointer;
+  background-color :darkgreen;
+
 }

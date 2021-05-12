@@ -102,6 +102,7 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
+      
   };
 
   const deletPost = (postId) => {
@@ -133,28 +134,40 @@ const Home = () => {
               style={{ borderRadius: "20px", padding: "1px" }}
               key={item._id}
             >
-              <h5>
-                <Link
-                  style={{ fontWeight: "bold", marginLeft: "7px" }}
-                  className="linktoprofile white-text text-darken-2"
-                  to={
-                    item.postedBy._id !== state._id
-                      ? "/profile/" + item.postedBy._id
-                      : "/profile"
-                  }
-                >
-                  {item.postedBy.name}
-                </Link>
-                {item.postedBy._id == state._id && (
-                  <i 
-                    className="deleteicon material-icons"
-                    style={{ float: "right" }}
-                    onClick={() => deletPost(item._id)}
+              <div className="userPicAndName">
+                <img
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "20px",
+                    marginTop: "6px",
+                    marginLeft: "7px",
+                  }}
+                  src={item.postedBy.pic}
+                />
+                <h5>
+                  <Link
+                    style={{ fontWeight: "bold", marginLeft: "7px" }}
+                    className="linktoprofile white-text text-darken-2"
+                    to={
+                      item.postedBy._id !== state._id
+                        ? "/profile/" + item.postedBy._id
+                        : "/profile"
+                    }
                   >
-                    delete
-                  </i>
-                )}
-              </h5>
+                    {item.postedBy.name}
+                  </Link>
+                  {item.postedBy._id == state._id && (
+                    <i
+                      className="deleteicon material-icons"
+                      style={{ float: "right" }}
+                      onClick={() => deletPost(item._id)}
+                    >
+                      delete
+                    </i>
+                  )}
+                </h5>
+              </div>
               <div className="card-image">
                 <img
                   className="cardimagepost"
@@ -207,6 +220,14 @@ const Home = () => {
             </div>
           );
         })}
+
+      {state && (
+        <div id="btnAddNewPost">
+          <Link className="addlink" to="/create">
+          <button className="addNewPost">+</button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

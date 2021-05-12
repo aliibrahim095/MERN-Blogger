@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 import { UserContext } from "../../App";
 const Profile = () => {
   const [mypics, setPics] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  // const [url, setUrl] = useState("");
 
   useEffect(() => {
     fetch("/mypost", {
@@ -31,11 +32,29 @@ const Profile = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          setUrl(data.url);
-          console.log(data)
-          localStorage.setItem("user", JSON.stringify({...state,pic:data.url}))
-          dispatch({type:"UPDATEPIC",payload:data.url})
-          window.location.reload();
+          // setUrl(data.url);
+          // localStorage.setItem(
+          //   "user",
+          //   JSON.stringify({ ...state, pic: data.url })
+          // );
+          // dispatch({ type: "UPDATEPIC", payload: data.url });
+          fetch("/updatepic",{
+            method: "put",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem("jwt"),
+            },
+            body: JSON.stringify({pic:data.url})
+          }).then(res=>res.json())
+          .then(result=>{
+            console.log(result)
+            localStorage.setItem(
+                "user",
+                JSON.stringify({ ...state, pic: data.pic })
+              );
+          dispatch({ type: "UPDATEPIC", payload: result.pic });
+          // window.location.reload();
+          })
         })
         .catch((err) => {
           console.log(err);
@@ -63,11 +82,15 @@ const Profile = () => {
                   width: "160px",
                   height: "160px",
                   borderRadius: "80px",
+                  marginRight: "20px",
                 }}
                 src={state ? state.pic : "loading..."}
               />
               <div className="file-field input-field">
-                <div className="btn #64b5f6 blue darken-1">
+                <div
+                  className="btn #64b5f6 blue darken-1"
+                  style={{ marginLeft: "20px" }}
+                >
                   <span>update pic</span>
                   <input
                     type="file"
@@ -93,8 +116,8 @@ const Profile = () => {
                   {mypics.length}{" "}
                   {mypics.length == 1 ? <b>Post</b> : <b>Posts</b>}
                 </h6>
-                <h6> {state? state.followers.length : "0"} followers</h6>
-                <h6> {state? state.following.length : "0"} following</h6>
+                <h6> {state ? state.followers.length : "0"} followers</h6>
+                <h6> {state ? state.following.length : "0"} following</h6>
               </div>
             </div>
           </div>
@@ -113,6 +136,14 @@ const Profile = () => {
         </div>
       ) : (
         <h4>Loading...!</h4>
+      )}
+
+      {state && (
+        <div id="btnAddNewPost">
+          <Link className="addlink" to="/create">
+            <button className="addNewPost">+</button>
+          </Link>
+        </div>
       )}
     </>
   );
